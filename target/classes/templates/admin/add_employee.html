@@ -30,12 +30,6 @@
         <!-- CONTENT - RIGHT PANEL -->
         <div class="col-sm-12 col-md-9 col-lg-9 content">
             <h1> PANEL ADMINISTRATORA</h1>
-            <ul>
-                <li>1 - ADMINISTRATOR</li>
-                <li>2 - REJESTRUJĄCY</li>
-                <li>3 - ADWOKAT</li>
-                <li>4 - KSIĘGOWA</li>
-            </ul>
             <div class="panel-group" style="margin-top:40px">
                 <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
             </div>
@@ -77,15 +71,6 @@
                                 class="validation-message"></label>
                         </div>
                     </div>
-                   <!-- <div class="form-group">
-                        <div class="col-sm-9">
-                            <input type="text" th:field="*{RoleId}" placeholder="Rola"
-                                   class="form-control" />
-                            <label  th:if="${#fields.hasErrors('RoleId')}" th:errors="*{RoleId}"
-                                    class="validation-message"></label>
-                        </div>
-                    </div> -->
-
                     <div class="form-group">
                         <div class="col-sm-9">
                             <label  th:if="${#fields.hasErrors('RoleId')}" th:errors="*{RoleId}"

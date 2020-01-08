@@ -43,13 +43,6 @@ public class Case {
     @NotEmpty(message = "*Podaj date")
     public String caseDate;
 
-    @Column(name = "`case_time`")
-    @NotEmpty(message = "*Podaj godzine")
-    public String caseTime;
-
-    @Column(name = "`case_type`")
-    public String caseType;
-
     @Column(name="`case_lawyer`")
     public int lawyerId;
 
@@ -64,9 +57,6 @@ public class Case {
             {
                 String c1Date = c1.getCaseDate();
                 String c2Date = c2.getCaseDate();
-                if (c1Date.equals(c2Date)) {
-                    return c1.getCaseTime().compareTo(c2.getCaseTime());
-                }
                 return c1Date.compareTo(c2Date);
             }
         };
@@ -102,22 +92,6 @@ public class Case {
 
     public void setCaseDate(String caseDate) {
         this.caseDate = caseDate;
-    }
-
-    public String getCaseTime() {
-        return caseTime;
-    }
-
-    public void setCaseTime(String caseTime) {
-        this.caseTime = caseTime;
-    }
-
-    public String getCaseType() {
-        return caseType;
-    }
-
-    public void setCaseType(String caseType) {
-        this.caseType = caseType;
     }
 
     public int getLawyerId() {

@@ -37,7 +37,7 @@ public class User {
 	private int active;
 
 	@Column(name="role_id")
-	@Range(min=1, max=4,message="Range role is 1-4")
+	@Range(min=1, max=5,message="Range role is 1-5")
 	private int RoleId;
 
 

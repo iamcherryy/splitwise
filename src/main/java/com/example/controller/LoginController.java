@@ -54,7 +54,9 @@ public class LoginController {
             return "redirect:/lawyer/home";
         } else if (role.contains("ACCOUNTANT")) {
             return "redirect:/accountant/home";
-        } else {
+        } else if (role.contains("USER")) {
+            return "redirect:/user/home";
+        }else {
             return "redirect:/access-denied";
         }
     }
@@ -76,16 +78,20 @@ public class LoginController {
         if (userExists != null) {
             bindingResult
                     .rejectValue("email", "error.user",
-                            "There is already a user registered with the email provided");
+                            "Istnieje już użytkownik zarejestrowany na podany email");
         }
         if (bindingResult.hasErrors()) {
+            if(user.getRoleId()==0)
+            {
+                user.setRoleId(5); //jeżeli rola nie wpisana do dajemy 5 czyli USER
+
+            }
             modelAndView.setViewName("registration");
         } else {
             userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
+            modelAndView.addObject("successMessage", "Użytkownik został poprawnie zarejestrowany");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("registration");
-
         }
         return modelAndView;
     }
@@ -147,6 +153,17 @@ public class LoginController {
         modelAndView.addObject("listOfCases", currentDayCases);
         modelAndView.addObject("adminMessage", "Content Available Only for Users with Lawyer Role");
         modelAndView.setViewName("lawyer/home");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/user/home", method = RequestMethod.GET)
+    public ModelAndView home_user() {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
+        modelAndView.addObject("adminMessage", "Content Available Only for Users with Accountant Role");
+        modelAndView.setViewName("user/home");
         return modelAndView;
     }
 

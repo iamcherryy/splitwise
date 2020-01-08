@@ -73,7 +73,6 @@
                     <th scope="col">Imię</th>
                     <th scope="col">Nazwisko</th>
                     <th class="min-width-130"  scope="col">Data</th>
-                    <th class="min-width-130"  scope="col">Godzina</th>
                     <!--<th scope="col">Prowadzący</th>-->
                     <th scope="col">Opis sprawy</th>
                     <th></th>
@@ -85,7 +84,6 @@
                     <td th:text="${case.getClientName()}"></td>
                     <td th:text="${case.getClientSurname()}"></td>
                     <td class="min-width-130" th:text="${case.getCaseDate()}"></td>
-                    <td class="min-width-130" th:text="${case.getCaseTime()}"></td>
                     <!--<td th:text="${case.getLawyerId()}"></td>-->
                     <td th:text="${case.getCaseNote()}"></td>
                     <td><a class="btn btn-primary" th:href="@{|case_view/${case.id}|}">Szczegóły</a></td>

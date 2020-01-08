@@ -101,12 +101,12 @@ public class LawyerController {
             if (c.lawyerId == user.getId()) {
                 Event event = new Event();
                 event.setId(c.getCaseId());
-                event.setTitle(c.getClientName() + " " + c.getClientSurname() + " - " + c.getCaseNote() + " - " + c.getCaseTime());
+                event.setTitle(c.getClientName() + " " + c.getClientSurname() + " - " + c.getCaseNote());
                 event.setUrl("/lawyer/case_view/" + c.getCaseId());
                 event.setClassName("event-info");
 
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date caseDate =  dateFormat.parse(c.getCaseDate() + " " + c.getCaseTime());
+                Date caseDate =  dateFormat.parse(c.getCaseDate());
                 event.setStart(caseDate.getTime());
                 event.setEnd(caseDate.getTime());
 
