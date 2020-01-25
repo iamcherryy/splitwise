@@ -1,0 +1,106 @@
+<div lang="en" th:replace="layout/header"> </div>
+
+<div class="container-fluid " >
+    <div class="row">
+
+        <!-- ASIDE - LEFT PANEL -->
+        <div class="col-sm-12 col-md-3 col-lg-3 aside">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/user/home">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Panel użytkownika</li>
+                </ol>
+            </nav>
+
+            <div class="list-group-flush">
+                <a href="/user/home" class="list-group-item list-group-item-action">Panel</a>
+                <a href="/user/list_spendings" class="list-group-item list-group-item-action">Historia wydatków</a>
+                <a href="/user/list_users" class="list-group-item list-group-item-action">Dodaj wydatek</a>
+            </div>
+
+            <div class="aside__currentUser">
+
+                <p>Zalogowany jako:	<span class="badge badge-primary" th:utext="${userName}"></span></p>
+                <form th:action="@{/logout}" method="get">
+                    <button class="btn btn-outline-danger btn-sm" name="registration"	type="Submit">Wyloguj</button>
+                </form>
+            </div>
+
+        </div><!--/ ASIDE - LEFT PANEL -->
+
+        <!-- CONTENT - RIGHT PANEL -->
+        <div class="col-sm-12 col-md-9 col-lg-9 content">
+            <h1> Pożycz lub oddaj pieniądze</h1>
+            <div class="panel-group" style="margin-top:40px">
+                <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+            </div>
+
+            <div class="col-md-12 col-md-offset-3">
+                <form autocomplete="off" action="#" th:action="@{/user/add_spends}"
+                      th:object="${item}" method="post" class="form-horizontal"
+                      role="form">
+                    <div class="form-group" style="display:none;">
+                        <div class="col-sm-9">
+                            <p>Ty</p>
+                            <label th:if="${#fields.hasErrors('i_user_1')}" th:errors="*{i_user_1}"  class="validation-message"></label>
+                            <input type="text" th:value="${myId}" id="i_user_1" name="i_user_1" placeholder="Kto to?"    class="form-control" readonly="true"/>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display:none;">
+                        <div class="col-sm-9">
+                            <p>Friendas</p>
+                            <label th:if="${#fields.hasErrors('i_user_2')}" th:errors="*{i_user_2}"  class="validation-message"></label>
+                            <input type="text" th:value="*{i_user_2}" id="i_user_2" name="i_user_2" placeholder="Co to za friendas?"    class="form-control" readonly="true"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <p>Nazwa wydatku lub jego opis</p>
+                            <label th:if="${#fields.hasErrors('i_name')}" th:errors="*{i_name}"  class="validation-message"></label>
+                            <input type="text" th:field="*{i_name}" placeholder="Na co?/Za co?"    class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group" >
+                        <div class="col-sm-9">
+                            <p>Ofiara od której pożyczasz bądz szczęciarz, któremu oddajesz</p>
+                            <input type="text" th:value="${friendson}"  placeholder="Kto to?"    class="form-control" readonly="true"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <p>Data transakcji</p>
+                            <label th:if="${#fields.hasErrors('i_date')}" th:errors="*{i_date}"   class="validation-message"></label>
+                            <input type="date" th:field="*{i_date}" placeholder="Data transakcji" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <p>Kwota</p>
+                            <label	th:if="${#fields.hasErrors('i_price')}" th:errors="*{i_price}"  class="validation-message"></label>
+                            <input type="text" th:field="*{i_price}"  placeholder="Ile?" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <button type="submit" class="btn btn-primary btn-block">Dodaj pieniążki</button>
+                        </div>
+                    </div>
+
+                    <span th:utext="${successMessage}"></span>
+
+
+                </form>
+            </div>
+        </div><!--/ CONTENT - RIGHT PANEL -->
+
+    </div>
+</div>
+
+<div lang="en" th:replace="layout/footer :: footer"> </div>
+
+</body>
+</html>

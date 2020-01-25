@@ -1,0 +1,75 @@
+/* CONTENT - user panel */
+.content{
+    min-height: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.aside{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background: #efefef;
+    display: flex;
+    flex-direction: column;
+}
+.aside__currentUser{
+    margin-top: 30px;
+}
+.aside > .list-group-flush > .list-group-item-action:hover {
+    background: #E0E0E0 !important;
+}
+.breadcrumb{
+    background: none !important;
+    padding: 0;
+}
+
+
+/* NAVBAR*/
+.logo__img{
+    max-height: 36px;
+    width: auto;
+}
+.logo__text {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+
+/* FOOTER */
+.footer{
+    background: #dcdcdc;
+}
+.list-group-item{
+    background-color: transparent !important;
+}
+
+
+/* UNTILS */
+
+.min-width-130{
+    min-width: 130px;
+}
+
+
+/* SEARCH */
+.searchInput {
+    background-image: url('https://www.w3schools.com/css/searchicon.png '); /* https://www.w3schools.com/css/searchicon.png */
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+
+/* CALENDAR */
+.calendar-header {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.calendar-header .btn-group:first-of-type {
+    margin-right: 10px;
+}

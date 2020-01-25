@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Registration Form</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<form th:action="@{/}" method="get">
+		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
+	</form>
+
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-md-6 col-md-offset-3">
+				<h1>Panel rejestracji</h1>
+				<form name="myForm" autocomplete="off" action="#" th:action="@{/registration}"
+					  th:object="${user}" method="post" class="form-horizontal"
+					  role="form" onsubmit="return validateForm()">
+					<div class="form-group">
+						<div class="col-sm-9">
+							<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+								   class="validation-message"></label>
+							<input type="text" th:field="*{name}" placeholder="Imię"
+								   class="form-control" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-9">
+							<label	th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+									  class="validation-message"></label>
+							<input type="text" th:field="*{lastName}"
+								   placeholder="Nazwisko" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9">
+							<input type="text" th:field="*{email}" placeholder="Email"
+								   class="form-control" /> <label
+								th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+								class="validation-message"></label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9">
+							<input type="password" th:field="*{password}"
+								   placeholder="Hasło" class="form-control" /> <label
+								th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+								class="validation-message"></label>
+						</div>
+					</div>
+					<div class="form-group" style="display:none;">
+						<div class="col-sm-9">
+							<label  th:if="${#fields.hasErrors('RoleId')}" th:errors="*{RoleId}"
+									class="validation-message"></label>
+							<select th:field="*{RoleId}"  class="form-control">
+								<option value="5">Uzytkownik</option>
+								<option value="1">Administrator</option>
+								<option value="2">Rejestrujący</option>
+								<option value="3">Adwokat</option>
+								<option value="4">Księgowa</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-9">
+							<button type="submit" class="btn btn-primary btn-block">Dodaj użytkownika</button>
+						</div>
+					</div>
+
+					<span th:utext="${successMessage}"></span>
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+    function validateForm() {
+        var x = document.forms["myForm"]["name"].value;
+        var reg = /^[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/;
+        if (!reg.test(x)) {
+            alert("Nieprawidłowe imię");
+            return false;
+        }
+
+        var x2 = document.forms["myForm"]["lastName"].value;
+        var reg = /^[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ\-]+$/;
+        if (!reg.test(x2)) {
+            alert("Nieprawidłowe nazwisko");
+            return false;
+        }
+
+        var x3 = document.forms["myForm"]["email"].value;
+        var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!reg.test(x3)) {
+            alert("Nieprawidłowy adres email");
+            return false;
+        }
+
+        var x4 = document.forms["myForm"]["password"].value;
+        var reg = /^.{5,}$/;
+        if (!reg.test(x4)) {
+            alert("Hasło musi miec conajmniej 5 znaków");
+            return false;
+        }
+    }
+	</script>
+
+</body>
+</html>
