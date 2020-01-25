@@ -15,8 +15,8 @@
 
             <div class="list-group-flush">
                 <a href="/admin/home" class="list-group-item list-group-item-action">Panel</a>
-                <a href="/admin/add_employee" class="list-group-item list-group-item-action">Dodaj pracownika</a>
-                <a href="/admin/all_users" class="list-group-item list-group-item-action active">Lista pracowników</a>
+                <a href="/admin/add_employee" class="list-group-item list-group-item-action">Dodaj użytkownika</a>
+                <a href="/admin/all_users" class="list-group-item list-group-item-action active">Lista użytkowników</a>
             </div>
 
             <div class="aside__currentUser">
@@ -31,14 +31,7 @@
         <!-- CONTENT - RIGHT PANEL -->
         <div class="col-sm-12 col-md-9 col-lg-9 content">
             <h1> PANEL ADMINISTRATORA </h1>
-            <h2> Edycja pracownika </h2>
-
-            <ul>
-                <li>1 - ADMINISTRATOR</li>
-                <li>2 - REJESTRUJĄCY</li>
-                <li>3 - ADWOKAT</li>
-                <li>4 - KSIĘGOWA</li>
-            </ul>
+            <h2> Edycja użytkownika </h2>
 
             <form action="#" method="POST" th:action="@{/admin/edit/}+@{user.id}" th:object="${user}">
                 <input type="hidden" th:field="*{id}">
@@ -75,14 +68,6 @@
                             class="validation-message"></label>
                     </div>
                 </div>
-                <!-- <div class="form-group">
-                     <div class="col-sm-9">
-                         <input type="text" th:field="*{RoleId}" placeholder="Rola"
-                                class="form-control" />
-                         <label  th:if="${#fields.hasErrors('RoleId')}" th:errors="*{RoleId}"
-                                 class="validation-message"></label>
-                     </div>
-                 </div> -->
 
                 <div class="form-group">
                     <div class="col-sm-9">
@@ -90,9 +75,7 @@
                                 class="validation-message"></label>
                         <select th:field="*{RoleId}"  class="form-control">
                             <option value="1">Administrator</option>
-                            <option value="2">Rejestrujący</option>
-                            <option value="3">Adwokat</option>
-                            <option value="4">Księgowa</option>
+                            <option value="5">Użytkownik</option>
                         </select>
                     </div>
                 </div>

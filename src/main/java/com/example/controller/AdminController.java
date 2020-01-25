@@ -42,13 +42,13 @@ public class AdminController {
         if (userExists != null) {
             bindingResult
                     .rejectValue("email", "error.user",
-                            "There is already a user registered with the email provided");
+                            "Istnieje już użytkownik o podanym adresie email");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("admin/add_employee");
         } else {
             userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
+            modelAndView.addObject("successMessage", "Użytkownik został dodany poprawnie");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("admin/add_employee");
 

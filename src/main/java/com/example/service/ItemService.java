@@ -10,5 +10,6 @@ public interface ItemService {
     public  void saveItem(Item item);
     public Item findById(Integer Id);
     public void updateItem(Item item);
+    public void deleteItem(Item item);
 
 }

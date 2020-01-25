@@ -1,13 +1,10 @@
 package com.example.controller;
 
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 
-import com.example.model.Case;
 import com.example.model.Item;
-import com.example.service.CaseService;
 import com.example.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,8 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.model.User;
 import com.example.service.UserService;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -33,9 +28,6 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private CaseService caseService;
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login() {
@@ -51,12 +43,6 @@ public class LoginController {
 
         if (role.contains("ADMIN")) {
             return "redirect:/admin/home";
-        } else if (role.contains("RECORDER")) {
-            return "redirect:/recorder/home";
-        } else if (role.contains("LAWYER")) {
-            return "redirect:/lawyer/home";
-        } else if (role.contains("ACCOUNTANT")) {
-            return "redirect:/accountant/home";
         } else if (role.contains("USER")) {
             return "redirect:/user/home";
         }else {
@@ -94,7 +80,7 @@ public class LoginController {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "Użytkownik został poprawnie zarejestrowany");
             modelAndView.addObject("user", new User());
-            modelAndView.setViewName("registration");
+            return new ModelAndView("redirect:/login");
         }
         return modelAndView;
     }
@@ -110,54 +96,6 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/recorder/home", method = RequestMethod.GET)
-    public ModelAndView home__recorder() {
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-        modelAndView.addObject("adminMessage", "Content Available Only for Users with Recorder Role");
-        modelAndView.setViewName("recorder/home");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/accountant/home", method = RequestMethod.GET)
-    public ModelAndView home_accountant() {
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
-        modelAndView.addObject("adminMessage", "Content Available Only for Users with Accountant Role");
-        modelAndView.setViewName("accountant/home");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/lawyer/home", method = RequestMethod.GET)
-    public ModelAndView home_lawyer() {
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-
-        LocalDate date = LocalDate.now();
-
-        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("u-MM-dd");
-        String textDate = date.format(formatters);
-
-        List<Case> allCases = caseService.getAll();
-        List<Case> currentDayCases = new ArrayList<>();
-        Collections.sort(allCases, Case.getComparator());
-        for (Case c : allCases) {
-            if (c.lawyerId == user.getId() && c.getCaseDate().equals(textDate)) {
-                currentDayCases.add(c);
-            }
-        }
-
-        modelAndView.addObject("userName", user.getName() + " " + user.getLastName());
-        modelAndView.addObject("listOfCases", currentDayCases);
-        modelAndView.addObject("adminMessage", "Content Available Only for Users with Lawyer Role");
-        modelAndView.setViewName("lawyer/home");
-        return modelAndView;
-    }
 
     @RequestMapping(value = "/user/home", method = RequestMethod.GET)
     public ModelAndView home_user() {
@@ -214,10 +152,6 @@ public class LoginController {
                 }
             }
         }
-
-
-
-
 
         modelAndView.addObject("listOfFriendsWithDeal", listOfFriendsWithDeal);
         modelAndView.addObject("userAmount", userAmount);

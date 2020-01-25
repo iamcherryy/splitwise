@@ -16,7 +16,7 @@
             <div class="list-group-flush">
                 <a href="/user/home" class="list-group-item list-group-item-action">Panel</a>
                 <a href="/user/list_spendings" class="list-group-item list-group-item-action active">Historia wydatków</a>
-                <a href="/user/list_users" class="list-group-item list-group-item-action">Dodaj wydatek</a>
+                <a href="/user/list_users" class="list-group-item list-group-item-action">Pożycz od przyjaciela</a>
                 <a href="/user/list_debt" class="list-group-item list-group-item-action ">Rozlicz przyjaciół</a>
                 <a href="/user/help" class="list-group-item list-group-item-action">Pomoc</a>
 
@@ -63,6 +63,7 @@
                         <th>Data</th>
                         <th>Kwota</th>
                         <th>Edytuj</th>
+                        <th>Usuń</th>
 
                     </tr>
 
@@ -72,9 +73,11 @@
                         <td th:text="${spendings.i_name}"></td>
                         <td th:text="${userId==spendings.i_user_1 ? (userservice.findById(spendings.i_user_2).name + ' ' + userservice.findById(spendings.i_user_2).lastName) : (userservice.findById(spendings.i_user_1).name + ' ' + userservice.findById(spendings.i_user_1).lastName)}"></td>
                         <td th:text="${spendings.i_date}"></td>
-                        <td th:utext="${userId==spendings.i_user_1 ? 'you owed'+'<br/>'+spendings.i_price : 'owed you'+'<br/>'+spendings.i_price}"></td>
+                        <td th:utext="${userId==spendings.i_user_1 ? 'jesteś dłużny'+'<br/>'+spendings.i_price : 'winny tobie'+'<br/>'+spendings.i_price}"></td>
                         <td th:if="${userId==spendings.i_user_1}"><a href="Edytuj" th:href="@{|edit_item/${spendings.id}|}"><img th:src="@{/images/edit_icon.png}"> </a></td>
                         <td th:unless="${userId==spendings.i_user_1}"><img th:src="@{/images/edit_icon_disabled.png}"> </a></td>
+                        <td th:if="${userId==spendings.i_user_1}"><a href="Usuń" th:href="@{|delete_item/${spendings.id}|}"><img th:src="@{/images/delete.png}"> </a></td>
+                        <td th:unless="${userId==spendings.i_user_1}"><img th:src="@{/images/delete_empty.png}"> </a></td>
                     </tr>
                     </tbody>
                 </table>

@@ -15,8 +15,8 @@
 
             <div class="list-group-flush">
                 <a href="/admin/home" class="list-group-item list-group-item-action">Panel</a>
-                <a href="/admin/add_employee" class="list-group-item list-group-item-action">Dodaj pracownika</a>
-                <a href="/admin/all_users" class="list-group-item list-group-item-action active">Lista pracowników</a>
+                <a href="/admin/add_employee" class="list-group-item list-group-item-action">Dodaj użytkownika</a>
+                <a href="/admin/all_users" class="list-group-item list-group-item-action active">Lista użytkowników</a>
             </div>
 
             <div class="aside__currentUser">
@@ -56,9 +56,7 @@
                     <td th:text="${user.email}"></td>
                     <div th:switch="${user.RoleId}">
                         <td th:case="1">Administrator</td>
-                        <td th:case="2">Rejestrator</td>
-                        <td th:case="3">Adwokat</td>
-                        <td th:case="4">Księgowa</td>
+                        <td th:case="5">Użytkownik</td>
                     </div>
                     <td><a href="#" th:href="@{|employee_view/${user.id}|}">Więcej</a></td>
                 </tr>

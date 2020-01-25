@@ -1,9 +1,7 @@
 package com.example.controller;
 
-import com.example.model.Client;
 import com.example.model.Item;
 import com.example.model.User;
-import com.example.service.ClientService;
 import com.example.service.ItemService;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -27,10 +24,6 @@ public class UserController {
 
     @Autowired
     private ItemService itemService;
-
-
-    @Autowired
-    private ClientService clientService;
 
     @RequestMapping(value="/add_spends", method = RequestMethod.GET)
     public ModelAndView add_item(){
@@ -82,7 +75,7 @@ public class UserController {
             listOfItems.removeIf(item -> item.getI_user_1() != user.getId() && item.getI_user_2() != user.getId());
             listOfItems.removeIf(item -> item.getI_paid()==1);
             List<Item> listOfItemspaid = itemService.getAll();
-            listOfItems.removeIf(item -> item.getI_user_1() != user.getId() && item.getI_user_2() != user.getId());
+            listOfItemspaid.removeIf(item -> item.getI_user_1() != user.getId() && item.getI_user_2() != user.getId());
             listOfItemspaid.removeIf(item -> item.getI_paid()==0);
             //listOfItems.forEach(item -> item.setI_name_of_friend((userService.findById(item.getI_user_2())).getName() + ' ' + (userService.findById(item.getI_user_2())).getLastName()));
             view.addObject("listOfItems", listOfItems);
@@ -138,7 +131,8 @@ public class UserController {
         ModelAndView view = new ModelAndView();
 
         List<User> listOfUsers = userService.getAll();
-        listOfUsers.removeIf(obj -> obj.getId() == user.getId());
+        listOfUsers.removeIf(obj -> obj.getId() == user.getId() || obj.getRoleId() == 1);
+
 
         view.addObject("listOfUsers", listOfUsers);
         view.addObject("userName", user.getName() + " " + user.getLastName());
@@ -199,4 +193,33 @@ public class UserController {
         return new ModelAndView("redirect:/user/list_spendings");
     }
 
+    @RequestMapping(value="/delete_item/{id}", method = RequestMethod.GET)
+    public ModelAndView delete_confirm(@PathVariable Integer id){
+        ModelAndView view = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+
+        Item item = itemService.findById(id);
+        User friend = userService.findById(item.getI_user_2());
+
+        view.addObject("itemId", item.getId());
+        view.addObject("info", "Informacja o wydatku " + item.getId());
+        view.addObject("nazwaWydatku", "Nazwa wydatku: " + item.getI_name());
+        view.addObject("data", "Data: " + item.getI_date());
+        view.addObject("kwota", "Kwota " + item.getI_price() + "zł");
+
+        view.addObject("friend", friend.getName() + " " + friend.getLastName());
+        view.addObject("userName", user.getName() + " " + user.getLastName());
+        view.setViewName("/user/delete_item");
+        return view;
+    }
+
+    @RequestMapping(value="/do_delete/{id}", method = RequestMethod.GET)
+    public String handleDeleteUser(@PathVariable Integer id) {
+
+        Item itemToDelete = itemService.findById(id);
+        itemService.deleteItem(itemToDelete);
+        System.out.println("Usunięto wydatek o id: " + id);
+        return "redirect:/user/list_spendings";
+    }
 }
