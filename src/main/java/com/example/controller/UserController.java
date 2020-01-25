@@ -164,7 +164,7 @@ public class UserController {
         ModelAndView view = new ModelAndView();
 
         List<Item> listOfItems = itemService.getAll();
-        listOfItems.removeIf(item -> item.getI_user_2() == user.getId() && item.getI_user_1() != user.getId());
+        listOfItems.removeIf(item -> item.getI_user_2() != user.getId() && item.getI_user_1() == user.getId());
         listOfItems.removeIf(item -> (item.getI_paid() == 1));
         view.addObject("listOfItems", listOfItems);
         view.addObject("userservice", userService);

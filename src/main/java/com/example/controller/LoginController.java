@@ -177,21 +177,27 @@ public class LoginController {
         Map<Integer, Double> usersDebt = new HashMap<>();
         List <Integer> listOfFriendsWithDeal = new LinkedList<>();
 
+        double friendAmount = 0;
+
         for(User friend : listOfFriends) {
             double amount = 0;
             for (Item item : listOfItems){
                 if(item.getI_user_2()==user.getId() && item.getI_user_1()==friend.getId()){
                     amount = amount + item.getI_price();
+                    friendAmount = friendAmount + item.getI_price();
                 }
                 friendsDebt.put(friend.getId(), amount);
             }
         }
+
+        double userAmount = 0;
 
         for(User friend : listOfFriends) {
             double amount = 0;
             for (Item item : listOfItems){
                 if(item.getI_user_1()==user.getId() && item.getI_user_2()==friend.getId()){
                     amount = amount + item.getI_price();
+                    userAmount = userAmount + item.getI_price();
                 }
                 usersDebt.put(friend.getId(), amount);
             }
@@ -199,15 +205,23 @@ public class LoginController {
 
         for (Item item : listOfItems){
             if(item.getI_user_2()==user.getId()) {
-                if(!listOfFriendsWithDeal.contains(item.getI_user_1()))
-                listOfFriendsWithDeal.add(item.getI_user_1());
+                if(!listOfFriendsWithDeal.contains(item.getI_user_1())) {
+                    listOfFriendsWithDeal.add(item.getI_user_1());
+                }
             }else if(item.getI_user_1()==user.getId()) {
-                if(!listOfFriendsWithDeal.contains(item.getI_user_1()))
+                if(!listOfFriendsWithDeal.contains(item.getI_user_2())) {
                     listOfFriendsWithDeal.add(item.getI_user_2());
+                }
             }
         }
 
+
+
+
+
         modelAndView.addObject("listOfFriendsWithDeal", listOfFriendsWithDeal);
+        modelAndView.addObject("userAmount", userAmount);
+        modelAndView.addObject("friendAmount", friendAmount);
         modelAndView.addObject("friendsDebt", friendsDebt);
         modelAndView.addObject("usersDebt", usersDebt);
         modelAndView.addObject("userId", user.getId());

@@ -8,7 +8,7 @@
         <div class="col-sm-12 col-md-3 col-lg-3 aside">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/user/home">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/user/home" style="color:black">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Panel użytkownika</li>
                 </ol>
             </nav>
@@ -17,31 +17,35 @@
                 <a href="/user/home" class="list-group-item list-group-item-action active">Panel</a>
                 <a href="/user/list_spendings" class="list-group-item list-group-item-action">Historia wydatków</a>
                 <a href="/user/list_users" class="list-group-item list-group-item-action">Dodaj wydatek</a>
-                <a href="/user/list_debt" class="list-group-item list-group-item-action">Rozlicz przyjaciół</a>
+                <a href="/user/list_debt" class="list-group-item list-group-item-action active">Rozlicz przyjaciół</a>
             </div>
 
             <div class="aside__currentUser">
-                <p>Zalogowany jako:	<span class="badge badge-primary" th:utext="${userName}"></span></p>
+                <p>Zalogowany jako:	<span th:utext="${userName}"></span></p>
                 <form th:action="@{/logout}" method="get">
-                    <button class="btn btn-outline-danger btn-sm" name="registration"	type="Submit">Wyloguj</button>
+                    <button class="btn btn-primary btn-block" name="registration"	type="Submit">Wyloguj</button>
                 </form>
             </div>
         </div><!--/ ASIDE - LEFT PANEL -->
         <!-- CONTENT - RIGHT PANEL -->
 
         <div class="col-sm-12 col-md-9 col-lg-9 content">
-            <div class="card" th:each="friends: ${listOfFriendsWithDeal}" th:object="${friends}">
+            <img th:src="@{/images/cutez.png}" width="36px" height="36px" align="left"> <h3 th:text="'Hi ' + ${userService.findById(userId).name+' '+userService.findById(userId).lastName+'!'}"></h3>
+            <p th:text="'W sumie pozyczyles: '+${userAmount}+' zl'" th:style="${'text-align:right'}"></p>
+            <p th:text="'W sumie pozyczono do ciebie: '+${friendAmount}+' zl'" th:style="${'text-align:right'}"></p>
+
+            <div class="card" th:each="friends: ${listOfFriendsWithDeal}" th:object="${friends}" style="margin-top:10px;" >
                     <h5 class="card-header">Informacja o wydatku</h5>
                     <div class="card-body">
                         <div class="card-title">
-                            <h5 th:text="${userService.findById(friends).name}" align="center" style="color: #007bff; display:inline-block;">Name</h5>
-                            <h5 th:text="${userService.findById(friends).lastName}" align="center" style="color: #007bff; display:inline-block;">Name</h5>
-                        </div>
-                        <div class="card-text">
-                            <p> Pożyczona kwota:  <span th:text="${usersDebt.get(friends)}" > *** </span> </p>
-                            <p> Pozyczona od ciebie kwota:  <span th:text="${friendsDebt.get(friends)}" > *** </span> </p>
-                        </div>
+                            <h5 th:style="${'color:#DEA183; text-align:left'}" th:text="${userService.findById(friends).name}+' '+${userService.findById(friends).lastName}" align="center" style="color: #007bff; display:inline-block;">Name</h5>
+                            </div>
 
+                        <div class="card-text">
+                            <p th:text="'Pożyczona kwota: '+${usersDebt.get(friends)}+' zl'" th:style="${'text-align:left'}" > *** </p>
+                            <p th:text="'Pozyczona od ciebie kwota:  '+${friendsDebt.get(friends)}+' zl'" th:style="${'text-align:left'}" > *** </p> </p>
+                        </div>
+                    </div>
                     </div>
             </div>
 

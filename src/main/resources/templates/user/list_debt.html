@@ -8,8 +8,8 @@
         <div class="col-sm-12 col-md-3 col-lg-3 aside">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/user/home">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Panel rozliczania, potwierdz zwrócenie pieniędzy</li>
+                    <li class="breadcrumb-item"><a href="/user/home" style="color:black">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Potwierdz zwrócenie pieniędzy</li>
                 </ol>
             </nav>
 
@@ -22,9 +22,9 @@
 
             <div class="aside__currentUser">
 
-                <p>Zalogowany jako:	<span class="badge badge-primary" th:utext="${userName}"></span></p>
+                <p>Zalogowany jako:	<span th:utext="${userName}"></span></p>
                 <form th:action="@{/logout}" method="get">
-                    <button class="btn btn-outline-danger btn-sm" name="registration"	type="Submit">Wyloguj</button>
+                                        <button class="btn btn-primary btn-block" name="registration" type="Submit">Wyloguj</button>
                 </form>
             </div>
 
@@ -33,23 +33,23 @@
         <!-- CONTENT - RIGHT PANEL -->
 
         <div class="col-sm-12 col-md-9 col-lg-9 content">
-                <div class="card" th:each="spendings: ${listOfItems}" th:object="${spendings}">
+            <img th:src="@{/images/money.png}" width="36px" height="36px" align="left"> <h3 th:text="'Rozliczanie przyjaciół'"></h3>
+            <div class="card" th:each="spendings: ${listOfItems}" th:object="${spendings}" style="margin-top:10px;">
                     <form action="#" method="POST" th:action="@{/user/list_debt}">
                         <input type="hidden" th:value="*{id}" name="id" />
                     <h5 class="card-header">Informacja o wydatku</h5>
                     <div class="card-body">
                         <div class="card-title">
-                            <h5 th:text="${userId==spendings.i_user_1 ? userservice.findById(spendings.i_user_2).name : userservice.findById(spendings.i_user_1).name}" align="center" style="color: #007bff; display:inline-block;">Name</h5>
-                            <h5 th:text="${userId==spendings.i_user_1 ? userservice.findById(spendings.i_user_2).lastName : userservice.findById(spendings.i_user_1).lastName}" align="center" style="color: #007bff; display:inline-block;">Name</h5>
+                            <h5 th:style="${'color:#DEA183; text-align:left'}" th:text="${userId==spendings.i_user_1 ? userservice.findById(spendings.i_user_2).name : userservice.findById(spendings.i_user_1).name} +' '+ ${userId==spendings.i_user_1 ? userservice.findById(spendings.i_user_2).lastName : userservice.findById(spendings.i_user_1).lastName}"" align="center" style="color: #007bff; display:inline-block;">Name</h5>
                         </div>
                         <div class="card-text">
-                            <p> Pożyczona kwota:  <span th:text="${spendings.i_price}" > *** </span> </p>
-                            <p> Cel pożyczki:  <span th:text="${spendings.i_name}" > *** </span> </p>
+                            <p th:text="'Pożyczona kwota: '+${spendings.i_price}+' zl'" th:style="${'text-align:left'}" > *** </p>
+                            <p th:text="'Cel pożyczki: '+${spendings.i_name}" th:style="${'text-align:left'}" > *** </p>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-9">
-                                <button type="submit" class="btn btn-primary btn-block">Zatwierdz zwrot</button>
+                                <button type="submit" class="btn btn-primary btn-block" >Zatwierdz zwrot</button>
                             </div>
                         </div>
 

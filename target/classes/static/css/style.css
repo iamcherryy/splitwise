@@ -21,8 +21,27 @@
     background: none !important;
     padding: 0;
 }
+.btn-primary {
+    color: #fff;
+    background-color: #DEA183;
+    border-color: #fff
+}
 
+.btn-primary:hover {
+    color: #fff;
+    background-color: #DEAA91;
+    border-color: #fff
+}
+.btn-primary:active:focus {
+    color: #fff;
+    background-color: #DEAA91;
+    border-color: #fff
+}:active
 
+.btn-primary:focus,
+.btn-primary.focus {
+    box-shadow: 0 0 0 .2rem rgba(91, 194, 194, 0.5)
+}
 /* NAVBAR*/
 .logo__img{
     max-height: 36px;
