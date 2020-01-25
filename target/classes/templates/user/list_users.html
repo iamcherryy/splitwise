@@ -9,7 +9,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/user/home" style="color:black">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Panel użytkownika</li>
+                    <li class="breadcrumb-item active" aria-current="page">Dodawanie nowych zadłużeń </li>
                 </ol>
             </nav>
 
@@ -17,14 +17,16 @@
                 <a href="/user/home" class="list-group-item list-group-item-action">Panel</a>
                 <a href="/user/list_spendings" class="list-group-item list-group-item-action">Historia wydatków</a>
                 <a href="/user/list_users" class="list-group-item list-group-item-action active">Dodaj wydatek</a>
-                <a href="/user/list_debt" class="list-group-item list-group-item-action active">Rozlicz przyjaciół</a>
+                <a href="/user/list_debt" class="list-group-item list-group-item-action">Rozlicz przyjaciół</a>
+                <a href="/user/help" class="list-group-item list-group-item-action">Pomoc</a>
+
             </div>
 
             <div class="aside__currentUser">
 
                 <p>Zalogowany jako:	<span th:utext="${userName}"></span></p>
                 <form th:action="@{/logout}" method="get">
-                                        <button class="btn btn-primary btn-block" name="registration" type="Submit">Wyloguj</button>
+                    <button class="btn btn-danger btn-block" name="registration" type="Submit">Wyloguj</button>
                 </form>
             </div>
 
@@ -61,6 +63,7 @@
                         <th>Email</th>
                         <th>Imie</th>
                         <th>Nazwisko</th>
+                        <th>Pożycz</th>
                     </tr>
 
                     </thead>
@@ -69,7 +72,7 @@
                         <td th:text="${user.email}"></td>
                         <td th:text="${user.name}"></td>
                         <td th:text="${user.lastName}"></td>
-                        <td><a href="#" th:href="@{|add_spends/${user.id}|}">$</a></td>
+                        <td><a href="#" th:href="@{|add_spends/${user.id}|}"><img th:src="@{/images/money3.png}"></a></td>
                     </tr>
                     </tbody>
                 </table>

@@ -8,21 +8,24 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/user/home" style="color:black">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Panel użytkownika</li>
+                    <li class="breadcrumb-item active" aria-current="page">Dodawanie nowych zadłużeń</li>
                 </ol>
             </nav>
 
             <div class="list-group-flush">
                 <a href="/user/home" class="list-group-item list-group-item-action">Panel</a>
                 <a href="/user/list_spendings" class="list-group-item list-group-item-action">Historia wydatków</a>
-                <a href="/user/list_users" class="list-group-item list-group-item-action">Dodaj wydatek</a>
+                <a href="/user/list_users" class="list-group-item list-group-item-action active">Dodaj wydatek</a>
+                <a href="/user/list_debt" class="list-group-item list-group-item-action ">Rozlicz przyjaciół</a>
+                <a href="/user/help" class="list-group-item list-group-item-action">Pomoc</a>
+
             </div>
 
             <div class="aside__currentUser">
 
                 <p>Zalogowany jako:	<span th:utext="${userName}"></span></p>
                 <form th:action="@{/logout}" method="get">
-                                        <button class="btn btn-primary btn-block" name="registration" type="Submit">Wyloguj</button>
+                                        <button class="btn btn-danger btn-block" name="registration" type="Submit">Wyloguj</button>
                 </form>
             </div>
 
@@ -30,6 +33,7 @@
 
         <!-- CONTENT - RIGHT PANEL -->
         <div class="col-sm-12 col-md-9 col-lg-9 content">
+            <img th:src="@{/images/addspending.png}" width="36px" height="36px" align="left"> <h3 th:text="'Pozycz pieniadze'"></h3>
             <div class="panel-group" style="margin-top:40px">
                 <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
             </div>

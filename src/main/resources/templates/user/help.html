@@ -1,0 +1,58 @@
+<div lang="en" th:replace="layout/header" xmlns:th="http://www.w3.org/1999/xhtml"
+     xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"> </div>
+
+<div class="container-fluid " >
+    <div class="row">
+
+        <!-- ASIDE - LEFT PANEL -->
+        <div class="col-sm-12 col-md-3 col-lg-3 aside">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/user/home" style="color:black">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Formularz kontaktowy</li>
+                </ol>
+            </nav>
+
+            <div class="list-group-flush">
+                <a href="/user/home" class="list-group-item list-group-item-action">Panel</a>
+                <a href="/user/list_spendings" class="list-group-item list-group-item-action">Historia wydatków</a>
+                <a href="/user/list_users" class="list-group-item list-group-item-action">Dodaj wydatek</a>
+                <a href="/user/list_debt" class="list-group-item list-group-item-action">Rozlicz przyjaciół</a>
+                <a href="/user/help" class="list-group-item list-group-item-action active">Pomoc</a>
+
+            </div>
+
+            <div class="aside__currentUser">
+
+                <p>Zalogowany jako:	<span th:utext="${userName}"></span></p>
+                <form th:action="@{/logout}" method="get">
+                    <button class="btn btn-danger btn-block" name="registration" type="Submit">Wyloguj</button>
+                </form>
+            </div>
+
+        </div><!--/ ASIDE - LEFT PANEL -->
+
+        <!-- CONTENT - RIGHT PANEL -->
+
+        <div class="col-sm-12 col-md-9 col-lg-9 content">
+            <img th:src="@{/images/help.png}" width="36px" height="36px" align="left"> <h3 th:text="'Złoś problem'"></h3>
+            <div class="justify-content-md-center" ><script charset="UTF-8" src="https://edodatki.pl/code/kontakt?data%5BWidget%5D%5Bcss%5D=white" type="text/javascript"></script> </div>
+
+
+        </div><!--/ CONTENT - RIGHT PANEL -->
+
+
+    </div>
+</div>
+
+
+
+<div lang="en" th:replace="layout/footer :: footer"> </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.4/jspdf.plugin.autotable.js"></script>
+
+
+</body>
+</html>

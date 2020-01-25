@@ -1,5 +1,5 @@
 <div lang="en" th:replace="layout/header" xmlns:th="http://www.w3.org/1999/xhtml"
-     xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"> </div>
+            xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"> </div>
 
 <div class="container-fluid " >
     <div class="row">
@@ -18,13 +18,15 @@
                 <a href="/user/list_spendings" class="list-group-item list-group-item-action">Historia wydatków</a>
                 <a href="/user/list_users" class="list-group-item list-group-item-action">Dodaj wydatek</a>
                 <a href="/user/list_debt" class="list-group-item list-group-item-action active">Rozlicz przyjaciół</a>
+                <a href="/user/help" class="list-group-item list-group-item-action">Pomoc</a>
+
             </div>
 
             <div class="aside__currentUser">
 
                 <p>Zalogowany jako:	<span th:utext="${userName}"></span></p>
                 <form th:action="@{/logout}" method="get">
-                                        <button class="btn btn-primary btn-block" name="registration" type="Submit">Wyloguj</button>
+                    <button class="btn btn-danger btn-block" name="registration" type="Submit">Wyloguj</button>
                 </form>
             </div>
 
@@ -35,12 +37,12 @@
         <div class="col-sm-12 col-md-9 col-lg-9 content">
             <img th:src="@{/images/money.png}" width="36px" height="36px" align="left"> <h3 th:text="'Rozliczanie przyjaciół'"></h3>
             <div class="card" th:each="spendings: ${listOfItems}" th:object="${spendings}" style="margin-top:10px;">
-                    <form action="#" method="POST" th:action="@{/user/list_debt}">
-                        <input type="hidden" th:value="*{id}" name="id" />
+                <form action="#" method="POST" th:action="@{/user/list_debt}">
+                    <input type="hidden" th:value="*{id}" name="id" />
                     <h5 class="card-header">Informacja o wydatku</h5>
                     <div class="card-body">
                         <div class="card-title">
-                            <h5 th:style="${'color:#DEA183; text-align:left'}" th:text="${userId==spendings.i_user_1 ? userservice.findById(spendings.i_user_2).name : userservice.findById(spendings.i_user_1).name} +' '+ ${userId==spendings.i_user_1 ? userservice.findById(spendings.i_user_2).lastName : userservice.findById(spendings.i_user_1).lastName}"" align="center" style="color: #007bff; display:inline-block;">Name</h5>
+                            <h5 th:style="${'color:#DEA183; text-align:left'}" th:text="${userservice.findById(spendings.i_user_1).name + ' ' + userservice.findById(spendings.i_user_1).lastName }"" align="center" style="color: #007bff; display:inline-block;">Name</h5>
                         </div>
                         <div class="card-text">
                             <p th:text="'Pożyczona kwota: '+${spendings.i_price}+' zl'" th:style="${'text-align:left'}" > *** </p>
@@ -54,8 +56,8 @@
                         </div>
 
                     </div>
-                    </form>
-                </div>
+                </form>
+            </div>
 
 
         </div><!--/ CONTENT - RIGHT PANEL -->

@@ -17,13 +17,15 @@
                 <a href="/user/home" class="list-group-item list-group-item-action active">Panel</a>
                 <a href="/user/list_spendings" class="list-group-item list-group-item-action">Historia wydatków</a>
                 <a href="/user/list_users" class="list-group-item list-group-item-action">Dodaj wydatek</a>
-                <a href="/user/list_debt" class="list-group-item list-group-item-action active">Rozlicz przyjaciół</a>
+                <a href="/user/list_debt" class="list-group-item list-group-item-action">Rozlicz przyjaciół</a>
+                <a href="/user/help" class="list-group-item list-group-item-action">Pomoc</a>
+
             </div>
 
             <div class="aside__currentUser">
                 <p>Zalogowany jako:	<span th:utext="${userName}"></span></p>
                 <form th:action="@{/logout}" method="get">
-                    <button class="btn btn-primary btn-block" name="registration"	type="Submit">Wyloguj</button>
+                    <button class="btn btn-danger btn-block" name="registration"	type="Submit">Wyloguj</button>
                 </form>
             </div>
         </div><!--/ ASIDE - LEFT PANEL -->
@@ -31,8 +33,19 @@
 
         <div class="col-sm-12 col-md-9 col-lg-9 content">
             <img th:src="@{/images/cutez.png}" width="36px" height="36px" align="left"> <h3 th:text="'Hi ' + ${userService.findById(userId).name+' '+userService.findById(userId).lastName+'!'}"></h3>
-            <p th:text="'W sumie pozyczyles: '+${userAmount}+' zl'" th:style="${'text-align:right'}"></p>
-            <p th:text="'W sumie pozyczono do ciebie: '+${friendAmount}+' zl'" th:style="${'text-align:right'}"></p>
+            <div class="card">
+                <div class="row justify-content-md-center">
+                    <div class="col-sm-12 col-md-3 text-center">
+                        <p><img src="/images/board.png" alt="board"></p>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <p th:text="'Twoje zaległości: '+${userAmount}+' zl'" th:style="${'text-align:center'}"> </p>
+                        <p th:text="'Pożyczono do Ciebie: '+${friendAmount}+' zl'" th:style="${'text-align:center'}"></p>
+                    </div>
+                </div>
+            </div>
+
+
 
             <div class="card" th:each="friends: ${listOfFriendsWithDeal}" th:object="${friends}" style="margin-top:10px;" >
                     <h5 class="card-header">Informacja o wydatku</h5>

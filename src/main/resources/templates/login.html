@@ -16,15 +16,15 @@
 				id="password" name="password" class="form-control" />
 				
 			<div align="center" th:if="${param.error}">
-				<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+				<p style="font-size: 15; color: #FF1C19;">Email or Password invalid, please verify</p>
 			</div>
 
-			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="login" type="Submit" th:text=${"Log&nbsp;In"}></button>
+			<button class="btn btn-lg btn-secondary btn-block" name="Submit" value="login" type="Submit" th:text=${"Log&nbsp;In"}></button>
 			<!--<button class="btn btn-lg btn-secondary btn-block" name="Submit" value="registration" th:text=${"Sign&nbsp;Up"}></button>-->
 		</form>
 
 		<form th:action="@{/registration}" method="GET" class="form-signin">
-			<button class="btn btn-lg btn-primary btn-block" th:text=${"Sign&nbsp;Up"}></button>
+			<button class="btn btn-lg btn-outline-secondary btn-block" th:text=${"Sign&nbsp;Up"}></button>
 		</form>
 
 	</div>

@@ -9,7 +9,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/user/home" style="color:black">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Panel użytkownika</li>
+                    <li class="breadcrumb-item active" aria-current="page">Historia wydatków</li>
                 </ol>
             </nav>
 
@@ -17,14 +17,16 @@
                 <a href="/user/home" class="list-group-item list-group-item-action">Panel</a>
                 <a href="/user/list_spendings" class="list-group-item list-group-item-action active">Historia wydatków</a>
                 <a href="/user/list_users" class="list-group-item list-group-item-action">Dodaj wydatek</a>
-                <a href="/user/list_debt" class="list-group-item list-group-item-action active">Rozlicz przyjaciół</a>
+                <a href="/user/list_debt" class="list-group-item list-group-item-action ">Rozlicz przyjaciół</a>
+                <a href="/user/help" class="list-group-item list-group-item-action">Pomoc</a>
+
             </div>
 
             <div class="aside__currentUser">
 
                 <p>Zalogowany jako:	<span th:utext="${userName}"></span></p>
                 <form th:action="@{/logout}" method="get">
-                                        <button class="btn btn-primary btn-block" name="registration" type="Submit">Wyloguj</button>
+                    <button class="btn btn-danger btn-block" name="registration" type="Submit">Wyloguj</button>
                 </form>
             </div>
 
@@ -49,43 +51,11 @@
                     <label  class="font-weight-light" for="searchInput3">Data</label>
                     <input class="searchInput" type="text" id="searchInput3" onkeyup="search(2)" placeholder="Wyszukaj date transakcji" >
                 </div>
-                <div class="col-sm-12 col-md-3 justify-content-center ">
-                    <p>Raport:</p>
-                    <button onclick="generatePDF()" class="btn btn-primary btn-lg"> Generuj PDF </button>
 
-                </div>
             </div>
-
-            <div class="table-responsive">
-                <table id="itemTable" class="table table-striped table-hover">
-                    <thead class="thead-light">
-                    <tr>
-                        <th>Nazwa wydatku</th>
-                        <th>Pomocny przyjaciel</th>
-                        <th>Data</th>
-                        <th>Kwota</th>
-                        <th>Status</th>
-                        <th>Raport <button onclick="checkAll()" class="btn btn-info btn-sm checkItem">  Zaznacz pozostałe </button></th>
-
-                    </tr>
-
-                    </thead>
-                    <tbody>
-                    <tr th:each="spendings: ${listOfItemspaid}">
-                        <td th:text="${spendings.i_name}"></td>
-                        <td th:text="${userservice.findById(spendings.i_user_2).name + ' ' + userservice.findById(spendings.i_user_2).lastName}"></td>
-                        <td th:text="${spendings.i_date}"></td>
-                        <td th:text="${spendings.i_price}"></td>
-                        <td th:text="uregulowane"></td>
-                        <td><input type="checkbox" class="cb-element" /></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
             <!--lista userow oraz form dodawanie-edytowanie-->
             <div class="table-responsive">
-                <table id="itemTable1" class="table table-striped table-hover">
+                <table id="itemTable" class="table table-striped table-hover">
                     <thead class="thead-light">
                     <tr>
                         <th>Nazwa wydatku</th>
@@ -109,6 +79,41 @@
                     </tbody>
                 </table>
             </div>
+            <div class="row justify-content-md-center">
+            <div class="col-sm-12 col-md-3 justify-content-center ">
+                <p>Raport:  <button onclick="generatePDF()" class="btn btn-primary btn-lg"> Generuj PDF </button> </p>
+            </div>
+            <div class="col-sm-12 col-md-3 justify-content-center ">
+                <p>Zaznacz wszystkie:  <button onclick="checkAll()" class="btn btn-primary btn-lg"> <img th:src="@{/images/test.png}"> </button></p>
+            </div>
+            </div>
+            <div class="table-responsive">
+                <table id="itemTable1" class="table table-striped table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Nazwa wydatku</th>
+                        <th>Pomocny przyjaciel</th>
+                        <th>Data</th>
+                        <th>Kwota</th>
+                        <th>Status</th>
+                        <th>Raport </th>
+
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    <tr th:each="spendings: ${listOfItemspaid}">
+                        <td th:text="${spendings.i_name}"></td>
+                        <td th:text="${userservice.findById(spendings.i_user_2).name + ' ' + userservice.findById(spendings.i_user_2).lastName}"></td>
+                        <td th:text="${spendings.i_date}"></td>
+                        <td th:text="${spendings.i_price}"></td>
+                        <td th:text="uregulowane"></td>
+                        <td><input type="checkbox" class="cb-element" /></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
 
         </div><!--/ CONTENT - RIGHT PANEL -->
 
@@ -169,7 +174,7 @@ function generatePDF() {
 
     var columns =  ["Nazwa", "Przyjaciel", "Data", "Kwota"];
     var rows =[];
-    var table = document.getElementById("itemTable");
+    var table = document.getElementById("itemTable1");
     var i;
     for ( i = 1; i < table.rows.length; i++ ) {
         if (table.rows[i].style.display === "" && table.rows[i].cells[5].firstElementChild.checked) {

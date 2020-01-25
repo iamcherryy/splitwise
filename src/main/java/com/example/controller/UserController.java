@@ -44,6 +44,15 @@ public class UserController {
         return view;
     }
 
+    @RequestMapping(value="/help", method = RequestMethod.GET)
+    public ModelAndView get_help(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        ModelAndView view = new ModelAndView();
+        view.addObject("userName", user.getName() + " " + user.getLastName());
+        view.setViewName("/user/help");
+        return view;
+    }
     @RequestMapping(value = "/add_spends", method = RequestMethod.POST)
     public ModelAndView createNewItem(@Valid Item item, BindingResult bindingResult) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -164,7 +173,9 @@ public class UserController {
         ModelAndView view = new ModelAndView();
 
         List<Item> listOfItems = itemService.getAll();
-        listOfItems.removeIf(item -> item.getI_user_2() != user.getId() && item.getI_user_1() == user.getId());
+        listOfItems.removeIf(item -> (item.getI_user_2() != user.getId()));
+        listOfItems.removeIf(item -> (item.getI_paid() == 1));
+        listOfItems.removeIf(item -> (item.getI_user_1() == user.getId()));
         listOfItems.removeIf(item -> (item.getI_paid() == 1));
         view.addObject("listOfItems", listOfItems);
         view.addObject("userservice", userService);

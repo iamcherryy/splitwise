@@ -157,9 +157,11 @@ CREATE TABLE `spendings` (
 
 INSERT INTO `spendings` (`spend_id`, `spend_name`, `spend_price`, `spend_date`, `spend_user_1`, `spend_user_2`, `paid_debt`) VALUES
 (12, 'Przygotowanie dokumentacji', '199.00', '2018-06-15', 20, 2, 0),
-(16, 'GongBao', '14.50', '2020-01-23', 20, 3, 0),
+(16, 'GongBao', '14.50', '2020-01-23', 20, 21, 0),
 (17, 'Makaronik', '15.70', '2020-01-23', 20, 4, 0),
-(23, 'chujwieco', '350.00', '2020-01-24', 21, 20, 0);
+(18, 'Pizza', '25', '2020-01-02', 22, 21, 1),
+(19, 'Łyżwy', '13.70', '2020-01-20', 21, 22, 1),
+(23, 'Zakupy', '350.00', '2020-01-24', 21, 20, 0);
 
 -- --------------------------------------------------------
 
@@ -182,13 +184,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `active`, `email`, `last_name`, `name`, `password`, `role_id`) VALUES
-(1, 1, 'admin@gmail.com', 'Admin', 'Pan', '$2a$10$TNilSEl6ePjGf1K9a5q4NuNB.vkaPzcP/XBRY.zwrnfNPMfF9KxAK', 1),
-(2, 1, 'rejestrator@gmail.com', 'Rejestrator', 'Pan', '$2a$10$TNilSEl6ePjGf1K9a5q4NuNB.vkaPzcP/XBRY.zwrnfNPMfF9KxAK', 2),
-(3, 1, 'adwokat@gmail.com', 'Adwokat', 'Pan', '$2a$10$TNilSEl6ePjGf1K9a5q4NuNB.vkaPzcP/XBRY.zwrnfNPMfF9KxAK', 3),
-(4, 1, 'ksiegowa@gmail.com', 'Ksiegowa', 'Pani', '$2a$10$TNilSEl6ePjGf1K9a5q4NuNB.vkaPzcP/XBRY.zwrnfNPMfF9KxAK', 4),
-(5, 1, 'adwokat2@gmail.com', 'Adwokat2', 'Pan', '$2a$10$TNilSEl6ePjGf1K9a5q4NuNB.vkaPzcP/XBRY.zwrnfNPMfF9KxAK', 3),
-(20, 1, 'user@gmail.com', 'Uzytkownik', 'Zwyczajny', '$2a$10$39H.AqVm5S7twSh/pFsdMOeaxufWCix53uhSoO7HMAvcdsU./VS9G', 5),
-(21, 1, 'user2@gmail.com', 'Uzytkownik', 'Normalny', '$2a$10$UHn8/Viu10vSfREItMeO7.SyIZ/Yf/aU/ioFBukmmm1Dequdgm0YS', 5);
+(1, 1, 'user1@gmail.com', 'Kowlaski', 'Jan', '$2a$10$TNilSEl6ePjGf1K9a5q4NuNB.vkaPzcP/XBRY.zwrnfNPMfF9KxAK', 1),
+(2, 1, 'user2@gmail.com', 'Kubica', 'Robert', '$2a$10$TNilSEl6ePjGf1K9a5q4NuNB.vkaPzcP/XBRY.zwrnfNPMfF9KxAK', 2),
+(22, 1, 'user3@gmail.com', 'Małysz', 'Adam', '$2a$10$TNilSEl6ePjGf1K9a5q4NuNB.vkaPzcP/XBRY.zwrnfNPMfF9KxAK', 3),
+(4, 1, 'user4@gmail.com', 'Rodowicz', 'Maryla', '$2a$10$TNilSEl6ePjGf1K9a5q4NuNB.vkaPzcP/XBRY.zwrnfNPMfF9KxAK', 4),
+(20, 1, 'user@gmail.com', 'Cichopek', 'Katarzyna', '$2a$10$39H.AqVm5S7twSh/pFsdMOeaxufWCix53uhSoO7HMAvcdsU./VS9G', 5),
+(21, 1, 'user5@gmail.com', 'Mostowiak', 'Stefan', '$2a$10$UHn8/Viu10vSfREItMeO7.SyIZ/Yf/aU/ioFBukmmm1Dequdgm0YS', 5);
 
 --
 -- Indexes for dumped tables
