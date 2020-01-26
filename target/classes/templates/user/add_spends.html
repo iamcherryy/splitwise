@@ -39,7 +39,7 @@
             </div>
 
             <div class="col-md-12 col-md-offset-3">
-                <form autocomplete="off" action="#" th:action="@{/user/add_spends}"
+                <form autocomplete="off" action="#" th:action="@{/user/add_spends/}+*{i_user_2}"
                       th:object="${item}" method="post" class="form-horizontal"
                       role="form">
                     <div class="form-group" style="display:none;">
@@ -58,7 +58,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-9">
-                            <p>Nazwa wydatku lub jego opis</p>
+                            <p>Opis pożyczki</p>
                             <label th:if="${#fields.hasErrors('i_name')}" th:errors="*{i_name}"  class="validation-message"></label>
                             <input type="text" th:field="*{i_name}" placeholder="Na co?/Za co?"    class="form-control" />
                         </div>
@@ -66,16 +66,16 @@
 
                     <div class="form-group" >
                         <div class="col-sm-9">
-                            <p>Ofiara od której pożyczasz bądz szczęciarz, któremu oddajesz</p>
+                            <p>Przyjaciel, od którego pożyczasz</p>
                             <input type="text" th:value="${friendson}"  placeholder="Kto to?"    class="form-control" readonly="true"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-sm-9">
-                            <p>Data transakcji</p>
+                            <p>Data pożyczki</p>
                             <label th:if="${#fields.hasErrors('i_date')}" th:errors="*{i_date}"   class="validation-message"></label>
-                            <input type="date" th:field="*{i_date}" placeholder="Data transakcji" class="form-control" />
+                            <input type="date" id="datka" th:field="*{i_date}" class="form-control" />
                         </div>
                     </div>
 
@@ -89,7 +89,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-9">
-                            <button type="submit" class="btn btn-primary btn-block">Dodaj pieniążki</button>
+                            <button type="submit" class="btn btn-primary btn-block">Pożycz</button>
                         </div>
                     </div>
 
@@ -104,6 +104,20 @@
 </div>
 
 <div lang="en" th:replace="layout/footer :: footer"> </div>
+<script>
+$(document).ready(function() {
+var date = new Date();
 
+var day = date.getDate();
+var month = date.getMonth() + 1;
+var year = date.getFullYear();
+
+if (month < 10) month = "0" + month;
+if (day < 10) day = "0" + day;
+
+var today = year + "-" + month + "-" + day;
+$("#datka").attr("value", today);
+});
+</script>
 </body>
 </html>

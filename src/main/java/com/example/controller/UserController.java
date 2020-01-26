@@ -48,23 +48,27 @@ public class UserController {
         view.setViewName("/user/help");
         return view;
     }
-    @RequestMapping(value = "/add_spends", method = RequestMethod.POST)
+    @RequestMapping(value = "/add_spends/{id}", method = RequestMethod.POST)
     public ModelAndView createNewItem(@Valid Item item, BindingResult bindingResult) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         ModelAndView view = new ModelAndView();
+        User friend= userService.findById(item.getI_user_2());
         if (bindingResult.hasErrors()) {
+            view.addObject("myId", user.getId());
+            view.addObject("friendId", friend.getId());
             view.addObject("userName", user.getName() + " " + user.getLastName());
+            view.addObject("item", item);
+            view.addObject("friendson",friend.getName() + ' '+ friend.getLastName());
             view.setViewName("user/add_spends");
+            return view;
         } else {
             item.setI_paid(0);
             itemService.saveItem(item);
 //            view.addObject("item", new Item());
 //            view.addObject("userName", user.getName() + " " + user.getLastName());
-//            view.setViewName("user/add_spends");
             return new ModelAndView("redirect:/user/list_spendings");
         }
-        return view;
     }
 
     @RequestMapping(value ="/list_spendings",method = RequestMethod.GET)
