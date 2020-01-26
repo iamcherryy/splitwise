@@ -4,10 +4,13 @@ import com.example.service.UserService;
 import com.example.service.UserServiceImpl;
 import org.hibernate.annotations.Formula;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Date;
 
 
 @Entity
@@ -31,6 +34,7 @@ public class Item {
 
     @Column(name = "spend_price")
     @NotNull(message = "*Podaj kwotę")
+    @Min(value = 0, message="*Kwota nie może być ujemną wartością")
     private Double i_price;
 
 

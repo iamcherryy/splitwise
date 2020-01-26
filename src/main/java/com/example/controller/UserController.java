@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -151,6 +153,7 @@ public class UserController {
         //Item myItem = itemService.findById(id);
         Item myItem = new Item();
         myItem.setI_user_2(friend.getId());
+
         view.addObject("item", myItem);
         view.addObject("friendson", friend.getName() + " " + friend.getLastName());;
         view.addObject("userName", user.getName() + " " + user.getLastName());
