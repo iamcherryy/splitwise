@@ -173,7 +173,7 @@ function generatePDF() {
     var date = new Date();
     var minutes = ( date.getMinutes() > 10) ?  date.getMinutes() : "0"+ date.getMinutes();
     var dataString = date.getFullYear() + "_" + date.getMonth() + "_" + date.getDate() + "_" + date.getHours() + "_"+minutes;
-    var pdfHeader = "Raport wygenerowany w dniu: "+date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()+" o godzinie: "+date.getHours()+":"+minutes;
+    var pdfHeader = "Raport wygenerowany w dniu: "+date.getDate()+"/"+date.getMonth()+1+"/"+date.getFullYear()+" o godzinie: "+date.getHours()+":"+minutes;
 
     var columns =  ["Nazwa", "Przyjaciel", "Data", "Kwota"];
     var rows =[];
@@ -185,7 +185,7 @@ function generatePDF() {
             currRow[0] = table.rows[i].cells[0].innerHTML;
             currRow[1] = table.rows[i].cells[1].innerHTML;
             currRow[2] = table.rows[i].cells[2].innerHTML;
-            currRow[3] = table.rows[i].cells[3].innerHTML;
+            currRow[3] = table.rows[i].cells[3].innerHTML.split('>')[1].split('z')[0];
             rows.push(currRow);
         }
     }

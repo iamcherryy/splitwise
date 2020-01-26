@@ -32,7 +32,7 @@
         <!-- CONTENT - RIGHT PANEL -->
 
         <div class="col-sm-12 col-md-9 col-lg-9 content">
-            <img th:src="@{/images/cutez.png}" width="36px" height="36px" align="left"> <h3 th:text="'Hi ' + ${userService.findById(userId).name+' '+userService.findById(userId).lastName+'!'}"></h3>
+            <img th:src="@{/images/cutez.png}" width="36px" height="36px" align="left"> <h3 th:text="'Cześć ' + ${userService.findById(userId).name+' '+userService.findById(userId).lastName+'!'}"></h3>
             <div class="card">
                 <div class="row justify-content-md-center">
                     <div class="col-sm-12 col-md-3 text-center">

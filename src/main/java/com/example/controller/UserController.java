@@ -116,11 +116,12 @@ public class UserController {
         ModelAndView view = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+        User friend= userService.findById(item.getI_user_2());
         if (bindingResult.hasErrors()) {
-
             view.addObject("item", item);
             view.addObject("userName", user.getName() + " " + user.getLastName());
-
+            view.addObject("myId", user.getId());
+            view.addObject("friendson",friend.getName() + ' '+ friend.getLastName());
             view.setViewName("/user/edit_item");
             return view;
         } else {

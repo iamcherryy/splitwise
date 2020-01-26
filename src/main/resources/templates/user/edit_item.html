@@ -36,7 +36,7 @@
         <div class="col-sm-12 col-md-9 col-lg-9 content">
             <h1>Edytuj wydatek <img th:src="@{/images/piggy_icon.png}"> </h1>
 
-            <form action="#" method="POST" th:action="@{/user/edit_item/}+@{service.id}" th:object="${item}">
+            <form action="#" method="POST" th:action="@{/user/edit_item/}+*{id}" th:object="${item}">
                 <input required type="hidden" th:field="*{id}">
                 <input required type="hidden" th:field="*{i_user_1}">
                 <input required type="hidden" th:field="*{i_user_2}">
